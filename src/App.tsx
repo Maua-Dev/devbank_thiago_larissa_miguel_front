@@ -1,18 +1,21 @@
-import { useState } from 'react'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Deposit from './pages/Deposit'
+import History from './pages/History'
+import Withdraw from './pages/Withdraw'
+import Account from './pages/Account'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <h1>🚀 Vite React Template 🚀</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/deposit" element={<Deposit />} />
+        <Route path="/history" element={<History />} />
+        <Route path="/withdraw" element={<Withdraw />} />
+        <Route path="/account" element={<Account />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 
