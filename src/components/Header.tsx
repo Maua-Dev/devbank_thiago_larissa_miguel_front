@@ -1,17 +1,23 @@
 
 export function Header(){
     return (
-        <div style={{
-            backgroundColor: "#d6e8fc",
-            borderRadius: "20px",
-            padding: "36px 32px",
-            width: "340px",
-            display: "flex",
+        <header style={{
+            backgroundColor: "#ffffff",
+            color: "#000000",
+            textAlign: "center",
+            borderRadius: "0px",
+            padding: "30px",
+            width: "100%",
+            position : "fixed",
+            top: "0px",
+            left: "0px",
+            display: "fixed",
             flexDirection: "column",
-            gap: "16px",
+            gap: "px",
             boxShadow: "0 8px 32px rgba(37,99,235,0.10)",
+            
         }}>
             Dev Bank
-        </div>
+        </header>
     );
 }
