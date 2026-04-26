@@ -1,23 +1,35 @@
+// @ts-expect-error: CSS import handled by build tooling // Thiago: adicionei isso pro código não dar pau, estou descobrindo pra que serve (copilot que adicionou)
+import "../css/Header.css";
 
-export function Header(){
-    return (
-        <header style={{
-            backgroundColor: "#ffffff",
-            color: "#000000",
-            textAlign: "center",
-            borderRadius: "0px",
-            padding: "30px",
-            width: "100%",
-            position : "fixed",
-            top: "0px",
-            left: "0px",
-            display: "fixed",
-            flexDirection: "column",
-            gap: "px",
-            boxShadow: "0 8px 32px rgba(37,99,235,0.10)",
-            
-        }}>
-            Dev Bank
-        </header>
-    );
+type User = {
+  nome: string;
+  agencia: string;
+  conta: string;
+};
+
+type HeaderProps = {
+  user: User;
+};
+
+export function Header({ user }: HeaderProps) {
+  return (
+    <header className="header">
+      <div className="logo">
+        <span className="dev">DEV</span>
+        <span className="bank">BANK</span>
+      </div>
+    
+      <div className="header-right">
+
+        <div className="user-box">
+        <p>Nome: {user.nome}</p>
+        <p>Agência: {user.agencia}</p>
+        <p>Conta: {user.conta}</p>
+        </div> 
+
+         <div className="help">?</div>
+
+      </div>
+    </header>
+  );
 }
