@@ -4,6 +4,8 @@ import Deposit from './pages/Deposit'
 import History from './pages/History'
 import Withdraw from './pages/Withdraw'
 import Account from './pages/Account'
+import Documentation from './pages/Documentation'
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route path="/history" element={<History />} />
         <Route path="/withdraw" element={<Withdraw />} />
         <Route path="/account" element={<Account />} />
+        <Route path="/documentation" element={<Documentation />} />
       </Routes>
     </BrowserRouter>
   )
