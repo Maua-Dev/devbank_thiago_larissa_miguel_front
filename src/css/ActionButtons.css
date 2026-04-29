@@ -1,0 +1,29 @@
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding-top: 8px;
+}
+
+.btn-back,
+.btn-deposit {
+    padding: 12px 40px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    background: #1a5fd4;
+    color: #fff;
+    transition: opacity 0.15s;
+}
+
+.btn-back:hover,
+.btn-deposit:hover:not(:disabled) {
+    opacity: 0.85;
+}
+
+.btn-deposit:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
