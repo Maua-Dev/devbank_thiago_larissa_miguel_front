@@ -1,5 +1,6 @@
 // Withdraw.tsx
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; {/* ADICIONADO */}
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
 import { WithdrawActionButtons } from '../components/WithdrawActionButtons';
@@ -15,7 +16,8 @@ type WithdrawPageProps = {
     onWithdraw: (totalWithdraw: number) => void;
 }
 
-export function Withdraw({ currentBalance, onBack, onWithdraw }: WithdrawPageProps) {
+export function Withdraw({ currentBalance, onWithdraw }: WithdrawPageProps) {
+    const navigate = useNavigate(); {/* ADICIONADO */}
     const [quantities, setQuantities] = useState<QuantityMap>(
         Object.fromEntries(BANKNOTE_VALUES.map((v) => [v, 0]))
     );
@@ -51,7 +53,7 @@ export function Withdraw({ currentBalance, onBack, onWithdraw }: WithdrawPagePro
                 onSubtract={handleSubtract}
             />
             <WithdrawActionButtons
-                onBack={onBack}
+                onBack={() => navigate("/home")}
                 onWithdraw={() => onWithdraw(totalWithdraw)}
                 disabled={totalWithdraw === 0 || totalWithdraw > currentBalance}
             />

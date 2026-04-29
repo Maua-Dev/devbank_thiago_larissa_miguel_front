@@ -1,6 +1,5 @@
-
-
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
 import { DepositActionButtons } from '../components/DepositActionButtons';
@@ -16,7 +15,8 @@ type DepositPageProps = {
     onDeposit: (totalDeposited: number) => void;
 }
 
-export function Deposit({ currentBalance, onBack, onDeposit }: DepositPageProps) {
+export function Deposit({ currentBalance, onDeposit }: DepositPageProps) {
+    const navigate = useNavigate();
     const [quantities, setQuantities] = useState<QuantityMap>(
         Object.fromEntries(BANKNOTE_VALUES.map((v) => [v, 0]))
     );
@@ -56,7 +56,7 @@ export function Deposit({ currentBalance, onBack, onDeposit }: DepositPageProps)
                 onSubtract={handleSubtract}
             />
             <DepositActionButtons
-                onBack={onBack}
+                onBack={() => navigate("/home")}
                 onDeposit={() => onDeposit(totalDeposited)}
                 disabled={totalDeposited === 0}
             />

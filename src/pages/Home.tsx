@@ -4,8 +4,6 @@ import { Header } from "../components/Header";
 import { ActionCard } from "../components/ActionCard";
 import { FooterBar } from "../components/FooterBarAPI";
 import { useApp } from "../context/AppContext"; //puxa todos os dados da api
-// @ts-expect-error: CSS import handled by build tooling 
-//Miguel: o  codigo acima serve pro TypeScript ignorar arquivos como o de baixo como erros, e não  sublinhalos em vermelho;
 import "../css/Home.css";
 
 export default function Home() {
@@ -37,6 +35,12 @@ export default function Home() {
           <ActionCard titulo="Retirar"   tipo="retirar"   onClick={() => navigate("/withdraw")} />
           <ActionCard titulo="Transação" tipo="transacao"  onClick={() => navigate("/account")} />
         </div>
+
+        {/* botão para ir ao histórico */}
+        <button className="home-historico" onClick={() => navigate("/history")}>
+          Ver histórico
+        </button>
+
       </main>
       <FooterBar endpoint={endpoint} response={response} />
     </>
