@@ -3,7 +3,7 @@ import Login from './pages/Login'
 import Home from './pages/Home'
 import { Deposit } from './pages/Deposit'
 import History from './pages/History'
-import Withdraw from './pages/Withdraw'
+import { Withdraw } from './pages/Withdraw'
 import Account from './pages/Account'
 import Documentation from './pages/Documentation'
 import { AppProvider } from "./context/AppContext";

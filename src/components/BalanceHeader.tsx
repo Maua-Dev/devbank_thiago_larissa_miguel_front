@@ -10,7 +10,7 @@ export function BalanceHeader({ currentBalance, totalDeposited }: BalanceHeaderP
                 Saldo atual: R$ {currentBalance}  
             </span>
             <span className="balance-deposited">
-                /Quantidade depositada: R$ {totalDeposited}
+                Quantidade depositada: R$ {totalDeposited}
             </span>
         </div>
     );

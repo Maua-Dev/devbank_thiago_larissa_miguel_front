@@ -1,10 +1,11 @@
-type ActionButtonsProps = {
+// WithdrawActionButtons.tsx
+type WithdrawActionButtonsProps = {
     onBack: () => void;
-    onDeposit: () => void;
+    onWithdraw: () => void;
     disabled: boolean;
 }
 
-export function ActionButtons({ onBack, onDeposit, disabled }: ActionButtonsProps) {
+export function WithdrawActionButtons({ onBack, onWithdraw, disabled }: WithdrawActionButtonsProps) {
     return (
         <div className="action-buttons">
             <button className="btn-back" onClick={onBack}>
@@ -12,10 +13,10 @@ export function ActionButtons({ onBack, onDeposit, disabled }: ActionButtonsProp
             </button>
             <button
                 className="btn-deposit"
-                onClick={onDeposit}
+                onClick={onWithdraw}
                 disabled={disabled}
             >
-                Depositar
+                Sacar
             </button>
         </div>
     );

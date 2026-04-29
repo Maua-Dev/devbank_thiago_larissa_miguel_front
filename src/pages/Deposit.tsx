@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
-import { ActionButtons } from '../components/ActionButtons';
+import { DepositActionButtons } from '../components/DepositActionButtons';
 import "../css/Deposit.css";
 import { Header } from '../components/Header';
 
@@ -55,7 +55,7 @@ export function Deposit({ currentBalance, onBack, onDeposit }: DepositPageProps)
                 onAdd={handleAdd}
                 onSubtract={handleSubtract}
             />
-            <ActionButtons
+            <DepositActionButtons
                 onBack={onBack}
                 onDeposit={() => onDeposit(totalDeposited)}
                 disabled={totalDeposited === 0}
