@@ -3,14 +3,14 @@ import "../css/Documentation.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DocumentationItem } from "../components/Documentation";
+import { useApp } from "../context/AppContext";
 
 export default function Documentation() {
+  const { apiSource } = useApp();
   const navigate = useNavigate();
   const [activeId, setActiveId] = useState<string | null>(null);
   const [responses, setResponses] = useState<Record<string, any>>({});
   const [loading, setLoading] = useState<boolean>(false);
-
-  const baseUrl = "https://y5klzz3x33bqv3kytn4swkcwji0vlfhw.lambda-url.us-east-1.on.aws";
 
   const docData = [
     {
@@ -66,22 +66,27 @@ timestamp [float] - instante da operação`
   const handleToggle = async (id: string, method: string, path: string) => {
     if (activeId === id) {
       setActiveId(null);
-    } else {
+    } 
+    else {
       setActiveId(id);
-      if (!responses[id]) {
+    
+    if (!responses[id]) {
         setLoading(true);
         try {
-          const res = await fetch(`${baseUrl}${path}`, { method: method });
-          const data = await res.json();
-          setResponses(prev => ({ ...prev, [id]: data }));
-        } catch (err) {
-          setResponses(prev => ({ ...prev, [id]: "Erro ao conectar com a API." }));
-        } finally {
-          setLoading(false);
-        }
-      }
+          const options: RequestInit = { method: method };
+
+    if (method === 'POST') {
+      options.headers = { 'Content-Type': 'application/json' };
+      options.body = JSON.stringify({ "100": 1 }); 
     }
-  };
+
+    const res = await fetch(`${apiSource.replace(/\/$/, '')}${path}`, options);
+    const data = await res.json(); setResponses(prev => ({ ...prev, [id]: data }));} 
+      catch (err) {setResponses(prev => ({ ...prev, [id]: "Erro ao conectar com a API." }));} 
+      finally {setLoading(false);}
+    }
+  }
+};
 
   return (
     <div className="doc-container">
@@ -92,6 +97,7 @@ timestamp [float] - instante da operação`
             key={item.id}
             title={item.title}
             desc={item.desc}
+            
             response={responses[item.id] ? JSON.stringify(responses[item.id], null, 2) : (activeId === item.id && loading ? "Carregando..." : "")}
             isActive={activeId === item.id}
             onToggle={() => handleToggle(item.id, item.method, item.path)}

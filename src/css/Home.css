@@ -71,20 +71,24 @@ body {
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
+  justify-content: center !important;
+  gap: 10px; 
   background-color: #007bff;
   padding: 14px 24px;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .footer-input {
-  flex: 1;
+  max-width: 400px;
+  width: 100%;
   border: none;
   background: transparent;
   font-size: 15px;
   color: white;
   outline: none;
+  align-items: center;
+  text-align: center;
 }
 
 .footer-input::placeholder {
@@ -92,60 +96,23 @@ body {
   font-size: 15px;
 }
 
-.footer-icone {
-  width: 44px;
-  height: 44px;
-  background-color: #007bff;
-  border-radius: 10px;
-
+.copy-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  flex-shrink: 0;
+  padding: 5px;
 }
 
-.lapis {
-  width: 22px;
-  height: 22px;
-  position: relative;
-  transform: rotate(45deg);
-}
-
-.lapis-corpo {
-  position: absolute;
-  top: 0;
-  left: 4px;
-  width: 14px;
-  height: 16px;
-  background-color: white;
-  border-radius: 2px 2px 0 0;
-}
-/* Migue: não mexe nisso aqui porque qualquer ajuste fino tira a ponta do icone de lugar */
-.lapis-ponta {
-  position: absolute;
-  bottom: -1.5px;
-  left: 4px;
-  width: 0;
-  height: 0;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 8px solid white;
+.copy-btn img {
+  width: 20px;
+  height: 20px;
 }
 
 .footer-bar:hover {
-  background-color: #e28585e7;
+  background-color: #dc2626;
   cursor: pointer;
 }
 
-.footer-bar:hover .footer-input {
-  color: #eb3535e7;
-}
-
-.footer-bar:hover .footer-input::placeholder {
-  color: #eb3535e7;
-}
-
-.footer-bar:hover .footer-icone {
-  background-color: #eb3535e7;
-}

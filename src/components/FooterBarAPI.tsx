@@ -1,28 +1,39 @@
 // @ts-expect-error: CSS import handled by build tooling 
-//Miguel: o  codigo acima serve pro TypeScript ignorar arquivos como o de baixo como erros, e não  sublinhalos em vermelho;
+import copyIcon from "../assets/images/copyIcon.png";
+// @ts-expect-error: CSS import handled by build tooling 
 import "../css/Home.css";
+//Miguel: o  codigo acima serve pro TypeScript ignorar arquivos como o de baixo como erros, e não  sublinhalos em vermelho;
+
 
 type FooterBarProps = {
   endpoint: string;
-  onChange: (valor: string) => void;
+  response: string;
 };
 
-export function FooterBar({ endpoint, onChange }: FooterBarProps) {
+export function FooterBar({ endpoint, response}: FooterBarProps) {
+   const handleCopy = () => {
+    const textToCopy = response || endpoint;
+    if (textToCopy) {
+      navigator.clipboard.writeText(textToCopy);
+      alert("Copiado para a área de transferência!"); 
+    }
+  };
   return (
-    <div className="footer-bar">
+    <div className="footer-bar" onClick={handleCopy}>
       <input
         className="footer-input"
         type="text"
-        placeholder="Coloque aqui o endpoint da sua API"
         value={endpoint}
-        onChange={e => onChange(e.target.value)}
+        readOnly
       />
-      <div className="footer-icone">
-        <div className="lapis">
-          <div className="lapis-corpo" />
-          <div className="lapis-ponta" />
-        </div>
-      </div>
+
+      <button className="copy-btn">
+        <img src={copyIcon} alt="Copiar" />
+      </button>
+
+      {response && (
+        <pre className="response-content">{response}</pre>
+      )}
     </div>
   );
 }

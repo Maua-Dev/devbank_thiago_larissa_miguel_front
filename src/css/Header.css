@@ -27,19 +27,19 @@ body {
   gap: 20px;
 }
 
-.logo {
+.logo-header {
   font-size: 42px;
   font-weight: 900;
   letter-spacing: -2px;
 }
 
-.dev {
+.dev-header {
   color: white;
 }
 
-.bank {
+.bank-header {
   color: white;
-  text-shadow: 2px 2px 0px #ff4d4d;
+  text-shadow: 3px -3px 0px #dc2626 !important;
 }
 
 .user-box {
