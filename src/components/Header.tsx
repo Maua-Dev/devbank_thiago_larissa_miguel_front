@@ -18,9 +18,9 @@ export function Header({ user }: HeaderProps) {
 
   return (
     <header className="header">
-      <div className="logo">
-        <span className="dev">DEV</span>
-        <span className="bank">BANK</span>
+      <div className="logo-header">
+        <span className="dev-header">DEV</span>
+        <span className="bank-header">BANK</span>
       </div>
     
       <div className="header-right">
