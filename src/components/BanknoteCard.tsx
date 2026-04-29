@@ -21,17 +21,9 @@ export function BanknoteCard({ banknote, onAdd, onSubtract }: BanknoteCardProps)
             <div className="banknote-controls">
                 <span className="quantidade">Quantidade</span>
                 <div className="qtd-value">
-                    <button
-                        className="sub-banknote"
-                        onClick={onSubtract}
-                        disabled={banknote.quantity === 0}
-                    >
-                        -
-                    </button>
+                    <button className="sub-banknote" onClick={onSubtract} disabled={banknote.quantity === 0}>-</button>
                     <span className="qtd-count">{banknote.quantity}</span>
-                    <button className="add-banknote" onClick={onAdd}>
-                        +
-                    </button>
+                    <button className="add-banknote" onClick={onAdd}>+</button>
                 </div>
             </div>
         </div>
