@@ -2,14 +2,10 @@ import "../css/Documentation.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DocumentationItem } from "../components/Documentation";
-import { useApp } from "../context/AppContext";
 
 export default function Documentation() {
-  const { apiSource } = useApp();
   const navigate = useNavigate();
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [responses, setResponses] = useState<Record<string, any>>({});
-  const [loading, setLoading] = useState<boolean>(false);
 
   const docData = [
     {
@@ -22,7 +18,13 @@ export default function Documentation() {
 name [str] - nome do usuário,
 agency [str] - 4 dígitos,
 account [str] - 6 dígitos no esquema XXXXX-X,
-current_balance [float]`
+current_balance [float]`,
+      response: `{
+  "name": "Vitor Soller",
+  "agency": "0000",
+  "account": "00000-0",
+  "current_balance": 1000.0
+}`
     },
     {
       id: "post-deposit",
@@ -34,7 +36,20 @@ Caso o valor depositado seja o dobro da quantidade em conta, deve retornar o sta
 Em casos convencionais retorna:
 
 current_balance [float] - valor atual na conta,
-timestamp [float] - instante da operação em ms`
+timestamp [float] - instante da operação em ms`,
+      request: `{
+  "2": 1,
+  "5": 2,
+  "10": 3,
+  "20": 4,
+  "50": 5,
+  "100": 6,
+  "200": 7
+}`,
+      response: `{
+  "current_balance": 1000.0,
+  "timestamp": 1690482853890 
+}`
     },
     {
       id: "post-withdraw",
@@ -46,7 +61,20 @@ Caso o saldo seja insuficiente, deve retornar status code 403 e a string "Saldo 
 Em casos convencionais retorna:
 
 current_balance [float] - valor atual na conta,
-timestamp [float] - instante da operação em ms`
+timestamp [float] - instante da operação em ms`,
+      request: `{
+  "2": 1,
+  "5": 2,
+  "10": 3,
+  "20": 4,
+  "50": 5,
+  "100": 6,
+  "200": 7
+}`,
+      response: `{
+  "current_balance": 1000.0,
+  "timestamp": 1690482853890 
+}`
     },
     {
       id: "get-history",
@@ -58,34 +86,29 @@ timestamp [float] - instante da operação em ms`
 type [str] - tipo da transação,
 value [float] - valor da operação,
 current_balance [float] - saldo pós-operação,
-timestamp [float] - instante da operação`
+timestamp [float] - instante da operação`,
+      response: `{
+  "all_transactions": [
+    {
+      "type": "deposit",
+      "value": 100.0,
+      "current_balance": "1000.0",
+      "timestamp": 1690482853890
+    },
+    {
+      "type": "withdraw",
+      "timestamp": 1691707985704.6152,
+      "current_balance": 700.0,
+      "value": 300
+    }
+  ]
+}`
     }
   ];
 
-  const handleToggle = async (id: string, method: string, path: string) => {
-    if (activeId === id) {
-      setActiveId(null);
-    } 
-    else {
-      setActiveId(id);
-    
-    if (!responses[id]) {
-        setLoading(true);
-        try {
-          const options: RequestInit = { method: method };
-
-    if (method === 'POST') {
-      options.headers = { 'Content-Type': 'application/json' };
-      options.body = JSON.stringify({ "100": 1 }); 
-    }
-
-    const res = await fetch(`${apiSource.replace(/\/$/, '')}${path}`, options);
-    const data = await res.json(); setResponses(prev => ({ ...prev, [id]: data }));} 
-      catch (err) {setResponses(prev => ({ ...prev, [id]: "Erro ao conectar com a API." }));} 
-      finally {setLoading(false);}
-    }
-  }
-};
+  const handleToggle = (id: string) => {
+    setActiveId(activeId === id ? null : id);
+  };
 
   return (
     <div className="doc-container">
@@ -96,10 +119,11 @@ timestamp [float] - instante da operação`
             key={item.id}
             title={item.title}
             desc={item.desc}
-            
-            response={responses[item.id] ? JSON.stringify(responses[item.id], null, 2) : (activeId === item.id && loading ? "Carregando..." : "")}
+            response={activeId === item.id ? 
+              `${item.request ? "Request:\n" + item.request + "\n\n" : ""}Response:\n${item.response}` 
+              : ""}
             isActive={activeId === item.id}
-            onToggle={() => handleToggle(item.id, item.method, item.path)}
+            onToggle={() => handleToggle(item.id)}
           />
         ))}
         <button className="back-btn" onClick={() => navigate(-1)}>
