@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Home from './pages/Home'
-import Deposit from './pages/Deposit'
+import { Deposit } from './pages/Deposit'
 import History from './pages/History'
 import Withdraw from './pages/Withdraw'
 import Account from './pages/Account'

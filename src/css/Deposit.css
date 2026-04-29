@@ -1,0 +1,198 @@
+body {
+  margin: 0;
+}
+
+.deposit-main {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  background-color: #0d1b6e;
+  padding: 40px 40px;
+  box-sizing: border-box;
+  gap: 24px;
+}
+
+.balance-header {
+  width: 100%;
+  max-width: 900px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background-color: #007bff;
+  border-radius: 12px;
+  padding: 16px 32px;
+  box-sizing: border-box;
+  gap: 16px;
+}
+
+.balance-current {
+  background-color: #bfdbfe;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #1e3a8a;
+}
+
+.balance-deposited {
+  font-size: 15px;
+  font-weight: bold;
+  color: #bfdbfe;
+}
+
+.banknotes-section {
+  width: 100%;
+  max-width: 900px;
+
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.banknotes-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #bfdbfe;
+  line-height: 1.5;
+  padding-top: 8px;
+}
+
+.banknotes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 14px;
+}
+
+.banknote-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.banknote {
+  background-color: #007bff;
+  border-radius: 12px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: default;
+  transition: background-color 0.15s;
+}
+
+.banknote:hover {
+  background-color: #0060cc;
+}
+
+.banknote-currency {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 400;
+  align-self: flex-start;
+  padding-top: 28%;
+}
+
+.banknote-value {
+  font-size: 36px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.banknote-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+}
+
+.quantidade {
+  background-color: #bfdbfe;
+  color: #1e3a8a;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 6px;
+  flex: 1;
+  text-align: center;
+}
+
+.qtd-value {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.qtd-value button {
+  background: none;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  color: #bfdbfe;
+  cursor: pointer;
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.qtd-value button:hover {
+  color: #fff;
+}
+
+.qtd-value button:disabled {
+  color: #4a5a8a;
+  cursor: not-allowed;
+}
+
+.qtd-count {
+  font-size: 13px;
+  font-weight: 500;
+  min-width: 14px;
+  text-align: center;
+  color: #bfdbfe;
+}
+
+.action-buttons {
+  width: 100%;
+  max-width: 900px;
+
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding-top: 8px;
+}
+
+.btn-back,
+.btn-deposit {
+  padding: 12px 40px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.15s;
+}
+
+.btn-back:hover,
+.btn-deposit:hover:not(:disabled) {
+  background-color: #0060cc;
+}
+
+.btn-deposit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
