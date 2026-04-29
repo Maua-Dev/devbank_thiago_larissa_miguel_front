@@ -12,22 +12,29 @@ type Transacao = {
 };
 
 export default function History() {
-  const { userData, apiSource } = useApp();
-  const [transacoes, setTransacoes] = useState<Transacao[]>([]);
+  const { userData, apiSource, setUserData } = useApp();
+  const transacoes: Transacao[] = userData?.all_transactions || [];
   const navigate = useNavigate();
 
-  const [user] = useState({
+  const user = {
     nome: userData?.name || "Visitante",
     agencia: userData?.agency || "0000",
     conta: userData?.account || "00000-0"
-  });
+  };
 
   useEffect(() => {
+  if (!userData && apiSource) {
     fetch(`${apiSource}/history`)
       .then(res => res.json())
-      .then(data => setTransacoes(data.all_transactions))
+      .then(data => {
+        setUserData((prev: any) => ({
+          ...prev,
+          all_transactions: data.all_transactions 
+        }));
+      })
       .catch(err => console.error("Erro ao buscar histórico:", err));
-  }, [apiSource]);
+  }
+}, [userData, apiSource, setUserData]);
 
   return (
     <>

@@ -4,24 +4,22 @@ import Home from './pages/Home'
 import { Deposit } from './pages/Deposit'
 import History from './pages/History'
 import { Withdraw } from './pages/Withdraw'
-import Account from './pages/Account'
 import Documentation from './pages/Documentation'
 import { AppProvider } from "./context/AppContext";
 
 function App() {
   return (
     <AppProvider>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/deposit" element={<Deposit />} />
-        <Route path="/history" element={<History />} />
-        <Route path="/withdraw" element={<Withdraw />} />
-        <Route path="/account" element={<Account />} />
-        <Route path="/documentation" element={<Documentation />} />
-      </Routes>
-    </BrowserRouter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/deposit" element={<Deposit />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/withdraw" element={<Withdraw />} />
+          <Route path="/documentation" element={<Documentation />} />
+        </Routes>
+      </BrowserRouter>
     </AppProvider>
   )
 }
