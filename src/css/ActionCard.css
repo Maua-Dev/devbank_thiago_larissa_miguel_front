@@ -2,12 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-top: 60px;    
   gap: 20px;
 
   background-color: #007bff;
   border-radius: 16px;
-  padding: 200px 20px;
+  padding: 100px 20px;
   cursor: pointer;
 
   flex: 1;
@@ -100,7 +101,7 @@
 
 .seta--direita {
   flex-direction: row;
-  align-items: center;
+  align-items: center !important;
 }
 
 .seta--direita .seta-corpo {
@@ -121,7 +122,7 @@
 
 .seta--esquerda {
   flex-direction: row-reverse;
-  align-items: center;
+  align-items: center !important;
 }
 
 .seta--esquerda .seta-corpo {
@@ -141,5 +142,5 @@
 }
 
 .action-card:hover .cifrao span {
-  color: #e28585e7;
+  color: #dc2626;
 }

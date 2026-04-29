@@ -19,7 +19,7 @@
   background-color: #2563eb;
   display: flex;
   justify-content: center;
-  padding: 120px 0; 
+  padding: 60px 0; 
   position: relative;
 }
 
@@ -33,7 +33,7 @@
 }
 
 h1.logo {
-  font-size: 250px; 
+  font-size: 160px; 
   font-weight: 900;
   color: white;
   text-transform: uppercase;
@@ -54,7 +54,7 @@ h1.logo {
 }
 
 .input-api {
-  width: 120%;
+  width: 100%;
   padding: 25px; 
   border-radius: 8px;
   border: none;

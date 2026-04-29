@@ -33,14 +33,8 @@ export default function Home() {
         <div className="home-cards">
           <ActionCard titulo="Depositar" tipo="depositar" onClick={() => navigate("/deposit")} />
           <ActionCard titulo="Retirar"   tipo="retirar"   onClick={() => navigate("/withdraw")} />
-          <ActionCard titulo="Transação" tipo="transacao"  onClick={() => navigate("/account")} />
+          <ActionCard titulo="Transação" tipo="transacao"  onClick={() => navigate("/history")} />
         </div>
-
-        {/* botão para ir ao histórico */}
-        <button className="home-historico" onClick={() => navigate("/history")}>
-          Ver histórico
-        </button>
-
       </main>
       <FooterBar endpoint={endpoint} response={response} />
     </>

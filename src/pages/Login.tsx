@@ -1,4 +1,3 @@
-// @ts-expect-error: CSS import handled by build tooling 
 import '../css/Login.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
