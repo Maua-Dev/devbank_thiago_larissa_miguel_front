@@ -6,8 +6,8 @@ import { DepositActionButtons } from '../components/DepositActionButtons';
 import "../css/Deposit.css";
 import { Header } from '../components/Header';
 
-const BANKNOTE_VALUES = [2, 5, 10, 20, 50, 100, 200];
-type QuantityMap = Record<number, number>;
+const BANKNOTE_VALUES = [2, 5, 10, 20, 50, 100, 200]; // Thiago : esses são os valores de cada cédula para as operações
+type QuantityMap = Record<number, number>; // Thiago: decidi usar um dicionário (key : value)
 
 type DepositPageProps = {
     currentBalance: number;
@@ -41,11 +41,7 @@ export function Deposit({ currentBalance, onDeposit }: DepositPageProps) {
 
     return (
             <body className="deposit-main">
-            <Header user={{
-          nome: '',
-          agencia: '',
-          conta: ''
-        }}/>
+            <Header />
             <BalanceHeader
                 currentBalance={currentBalance}
                 totalDeposited={totalDeposited}

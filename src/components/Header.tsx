@@ -1,20 +1,20 @@
 // @ts-expect-error: CSS import handled by build tooling // Thiago: adicionei isso pro código não dar pau, estou descobrindo pra que serve (copilot que adicionou)
 import "../css/Header.css";
 import { useNavigate } from 'react-router-dom';
+import { useApp } from "../context/AppContext"; //puxa todos os dados da api
 
-type User = {
-  nome: string;
-  agencia: string;
-  conta: string;
-};
 
-type HeaderProps = {
-  user: User;
-};
 
-export function Header({ user }: HeaderProps) {
-
+export function Header() {
   const navigate = useNavigate();
+
+  const {userData} = useApp(); //puxa todos os dados da api
+
+  const user = ({
+    nome: userData?.name || "Visitante",
+    agencia: userData?.agency || "0000",
+    conta: userData?.account || "00000-0"
+  });
 
   return (
     <header className="header">

@@ -42,7 +42,7 @@ export function Withdraw({ currentBalance, onWithdraw }: WithdrawPageProps) {
 
     return (
         <div className="withdraw-main">
-            <Header user={{ nome: '', agencia: '', conta: '' }} />
+            <Header/>
             <BalanceHeader
                 currentBalance={currentBalance}
                 totalDeposited={totalWithdraw}
