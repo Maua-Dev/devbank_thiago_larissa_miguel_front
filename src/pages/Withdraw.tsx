@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
 import { WithdrawActionButtons } from '../components/WithdrawActionButtons';
@@ -10,13 +10,9 @@ import "../css/Withdraw.css";
 const BANKNOTE_VALUES = [2, 5, 10, 20, 50, 100, 200];
 type QuantityMap = Record<number, number>;
 
-type WithdrawPageProps = {
-    onWithdraw: (totalWithdraw: number) => void;
-}
-
-export function Withdraw({onWithdraw }: WithdrawPageProps) {
-    const navigate = useNavigate(); 
-    const {userData} = useApp();
+export function Withdraw() {
+    const navigate = useNavigate();
+    const { userData, apiSource } = useApp();
     const currentBalance = userData?.current_balance || 0;
     const [quantities, setQuantities] = useState<QuantityMap>(
         Object.fromEntries(BANKNOTE_VALUES.map((v) => [v, 0]))
@@ -35,6 +31,23 @@ export function Withdraw({onWithdraw }: WithdrawPageProps) {
         setQuantities((prev) => ({ ...prev, [value]: Math.max(0, prev[value] - 1) }));
     }
 
+    //chamar no backend;
+    async function handleWithdraw(totalWithdraw: number) {
+        try {
+            const response = await fetch(`${apiSource}/withdraw`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ amount: totalWithdraw }),
+            });
+            const data = await response.json();
+            console.log("Saque realizado:", data);
+            navigate("/home");
+        } catch (error) {
+            console.error("Erro ao realizar saque:", error);
+            alert("Erro ao realizar saque");
+        }
+    }
+
     const banknotes = BANKNOTE_VALUES.map((v) => ({
         value: v,
         quantity: quantities[v],
@@ -42,7 +55,7 @@ export function Withdraw({onWithdraw }: WithdrawPageProps) {
 
     return (
         <div className="withdraw-main">
-            <Header/>
+            <Header />
             <BalanceHeader
                 currentBalance={currentBalance}
                 totalDeposited={totalWithdraw}
@@ -54,7 +67,7 @@ export function Withdraw({onWithdraw }: WithdrawPageProps) {
             />
             <WithdrawActionButtons
                 onBack={() => navigate("/home")}
-                onWithdraw={() => onWithdraw(totalWithdraw)}
+                onWithdraw={() => handleWithdraw(totalWithdraw)}
                 disabled={totalWithdraw === 0 || totalWithdraw > currentBalance}
             />
         </div>
