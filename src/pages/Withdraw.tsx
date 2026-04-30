@@ -39,9 +39,17 @@ export function Withdraw() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ amount: totalWithdraw }),
             });
+
+            if (!response.ok) {
+            throw new Error(`Erro HTTP: ${response.status}`);
+                }
+
             const data = await response.json();
+
             console.log("Saque realizado:", data);
+
             navigate("/home");
+
         } catch (error) {
             console.error("Erro ao realizar saque:", error);
             alert("Erro ao realizar saque");
