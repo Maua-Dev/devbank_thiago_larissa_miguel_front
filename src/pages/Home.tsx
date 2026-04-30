@@ -12,18 +12,13 @@ export default function Home() {
   const [endpoint] = useState(apiSource); 
   const [response] = useState("");
   const navigate = useNavigate();
+  
 
-  const [user] = useState({
-    nome: userData?.name || "Visitante",
-    agencia: userData?.agency || "0000",
-    conta: userData?.account || "00000-0"
-  });
-
-  const [saldo] = useState(userData?.current_balance || 0);
+  const saldo = userData?.current_balance || 0;
   
   return (
     <>
-      <Header user={user} />
+      <Header />
 
       <main className="home-main">
         <div className="home-pergunta">

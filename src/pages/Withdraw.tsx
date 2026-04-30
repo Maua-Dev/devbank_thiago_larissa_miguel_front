@@ -1,23 +1,23 @@
-// Withdraw.tsx
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; {/* ADICIONADO */}
+import { useNavigate } from 'react-router-dom'; 
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
 import { WithdrawActionButtons } from '../components/WithdrawActionButtons';
 import { Header } from '../components/Header';
+import { useApp } from "../context/AppContext";
 import "../css/Withdraw.css";
 
 const BANKNOTE_VALUES = [2, 5, 10, 20, 50, 100, 200];
 type QuantityMap = Record<number, number>;
 
 type WithdrawPageProps = {
-    currentBalance: number;
-    onBack: () => void;
     onWithdraw: (totalWithdraw: number) => void;
 }
 
-export function Withdraw({ currentBalance, onWithdraw }: WithdrawPageProps) {
-    const navigate = useNavigate(); {/* ADICIONADO */}
+export function Withdraw({onWithdraw }: WithdrawPageProps) {
+    const navigate = useNavigate(); 
+    const {userData} = useApp();
+    const currentBalance = userData?.current_balance || 0;
     const [quantities, setQuantities] = useState<QuantityMap>(
         Object.fromEntries(BANKNOTE_VALUES.map((v) => [v, 0]))
     );

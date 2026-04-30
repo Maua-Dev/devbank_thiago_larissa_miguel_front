@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
+import { useApp } from "../context/AppContext";
 import { DepositActionButtons } from '../components/DepositActionButtons';
 import "../css/Deposit.css";
 import { Header } from '../components/Header';
@@ -10,13 +11,12 @@ const BANKNOTE_VALUES = [2, 5, 10, 20, 50, 100, 200]; // Thiago : esses são os 
 type QuantityMap = Record<number, number>; // Thiago: decidi usar um dicionário (key : value)
 
 type DepositPageProps = {
-    currentBalance: number;
-    onBack: () => void;
     onDeposit: (totalDeposited: number) => void;
 }
 
-export function Deposit({ currentBalance, onDeposit }: DepositPageProps) {
+export function Deposit({onDeposit }: DepositPageProps) {
     const navigate = useNavigate();
+    const {userData} = useApp();
     const [quantities, setQuantities] = useState<QuantityMap>(
         Object.fromEntries(BANKNOTE_VALUES.map((v) => [v, 0]))
     );
@@ -43,7 +43,7 @@ export function Deposit({ currentBalance, onDeposit }: DepositPageProps) {
             <body className="deposit-main">
             <Header />
             <BalanceHeader
-                currentBalance={currentBalance}
+                currentBalance={userData.current_balance}
                 totalDeposited={totalDeposited}
             />
             <BanknotesGrid
