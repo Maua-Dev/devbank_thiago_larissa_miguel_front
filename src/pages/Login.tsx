@@ -11,23 +11,25 @@ const Login = () => {
   
 
 const handleLogin = async () => {
-  if (!apiUrl) return alert("Insira uma URL"); //pega os dados da api
+  if (!apiUrl) return alert("Insira uma URL");
   
   setLoading(true);
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
+    
     setApiSource(apiUrl);
     setUserData(data);
 
-    navigate("/home");}  
-    catch (error) {
-        alert("Erro ao conectar na API");
-    } 
-    finally {
-    setLoading(false);
-    }};
+    localStorage.setItem("api_url", apiUrl); 
 
+    navigate("/home");
+  } catch (error) {
+    alert("Erro ao conectar na API");
+  } finally {
+    setLoading(false);
+  }
+};
   return (
     <div className="login-page-wrapper">
       <div className="login-banner">
