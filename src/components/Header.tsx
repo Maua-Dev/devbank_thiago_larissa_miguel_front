@@ -26,7 +26,7 @@ export function Header() {
     <header className="header">
       <div className="logo-header">
         <span className="dev-header">DEV</span>
-        <span className="dev-header">BANK</span>
+        <span className="bank-header">BANK</span>
       </div>
 
       <div className="header-right">
