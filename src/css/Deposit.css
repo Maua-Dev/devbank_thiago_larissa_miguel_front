@@ -164,18 +164,19 @@ body {
   color: #bfdbfe;
 }
 
-.action-buttons {
+.deposit-action-buttons {
   width: 100%;
   max-width: 900px;
 
   display: flex;
-  justify-content: center;
-  gap: 16px;
-  padding-top: 8px;
+  justify-content: center; 
+  gap: 20px; 
+  padding-top: 24px;
 }
 
 .btn-back,
 .btn-deposit {
+  min-width: 160px; 
   padding: 12px 40px;
   border-radius: 8px;
   font-size: 15px;
