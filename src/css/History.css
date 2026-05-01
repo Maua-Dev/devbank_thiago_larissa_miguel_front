@@ -1,0 +1,93 @@
+.history-main {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  min-height: calc(100vh - 80px);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-color: #0d1b6e;
+  padding: 30px 40px;
+  box-sizing: border-box;
+}
+
+.history-titulo {
+  width: 100%;
+  max-width: 700px;
+
+  background-color: #007bff;
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.history-lista {
+  width: 100%;
+  max-width: 700px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.historico-item {
+  width: 100%;
+  background-color: #bfdbfe;
+  border-radius: 12px;
+  padding: 16px 24px;
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.historico-tipo {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e3a8a;
+  text-transform: capitalize;
+}
+
+.historico-valor {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e3a8a;
+}
+
+.historico-data {
+  font-size: 13px;
+  color: #1e3a8a;
+}
+
+.history-vazio {
+  color: #007bff;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.history-voltar {
+  margin-top: 30px;
+  padding: 12px 32px;
+  background-color: #2563eb;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.history-voltar:hover {
+  background-color: #1d4ed8;
+}

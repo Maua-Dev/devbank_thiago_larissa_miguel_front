@@ -1,0 +1,146 @@
+.action-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 60px;    
+  gap: 20px;
+
+  background-color: #007bff;
+  border-radius: 16px;
+  padding: 100px 20px;
+  cursor: pointer;
+
+  flex: 1;
+  min-width: 160px;
+
+  transition: background-color 0.2s;
+}
+
+.action-card:hover {
+  background-color: #dc2626;
+}
+
+.action-card-titulo {
+  color: white;
+  font-size: 24px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.action-card-icones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.action-card-icones--transacao {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cifrao {
+  width: 80px;
+  height: 48px;
+  background-color: white;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cifrao span {
+  color: #007bff;
+  font-size: 28px;
+  font-weight: 900;
+  transition: color 0.2s;
+}
+
+.seta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seta--cima .seta-corpo {
+  width: 8px;
+  height: 20px;
+  background-color: white;
+  border-radius: 0px;
+}
+
+.seta--cima .seta-ponta {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 20px solid white;
+  border-radius: 0px;
+}
+
+.seta--baixo .seta-corpo {
+  width: 8px;
+  height: 20px;
+  background-color: white;
+  border-radius: 0px;
+}
+
+.seta--baixo .seta-ponta {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 20px solid white;
+  border-radius: 0px;
+}
+
+.seta--direita {
+  flex-direction: row;
+  align-items: center !important;
+}
+
+.seta--direita .seta-corpo {
+  width: 20px;
+  height: 8px;
+  background-color: white;
+  border-radius: 0px;
+}
+
+.seta--direita .seta-ponta {
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 20px solid white;
+  border-radius: 0px;
+}
+
+.seta--esquerda {
+  flex-direction: row-reverse;
+  align-items: center !important;
+}
+
+.seta--esquerda .seta-corpo {
+  width: 20px;
+  height: 8px;
+  background-color: white;
+  border-radius: 0px;
+}
+
+.seta--esquerda .seta-ponta {
+  width: 0;
+  height: 0;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-right: 20px solid white;
+  border-radius: 0px;
+}
+
+.action-card:hover .cifrao span {
+  color: #dc2626;
+}

@@ -1,0 +1,75 @@
+
+body {
+  margin: 0;
+}
+
+.header {
+  position: fixed;     
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;       
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  background-color: #007bff;
+  padding: 15px 40px;
+  color: white;
+
+  box-sizing: border-box; 
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-header {
+  font-size: 42px;
+  font-weight: 900;
+  letter-spacing: -2px;
+}
+
+.dev-header {
+  color: white;
+}
+
+.bank-header {
+  color: white;
+  text-shadow: 3px -3px 0px #dc2626 !important;
+}
+
+.user-box {
+  background: white;
+  padding: 6px 15px;
+  border-radius: 8px;
+  
+  font-size: 13px;
+  font-weight: bold;
+  color: #007bff;
+  line-height: 1.3;
+}
+
+.user-box p {
+  margin: 2px 0;
+}
+
+.help {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: white;
+  color: #007bff;
+  
+  font-size: 24px;
+  font-weight: bold;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}

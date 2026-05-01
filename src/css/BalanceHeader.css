@@ -1,0 +1,26 @@
+.balance-header {
+    background: #a8c8f0;
+    border-radius: 10px;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.balance-current {
+    background: #1a5fd4;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 6px;
+    flex: 1;
+}
+
+.balance-deposited {
+    color: #1a5fd4;
+    font-size: 15px;
+    font-weight: 600;
+    flex: 1;
+    text-align: center;
+}

@@ -1,0 +1,95 @@
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+.login-page-wrapper {
+  width: 100vw; 
+  height: 100vh;
+  background-color: #0a1970; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-banner {
+  width: 100%;
+  background-color: #2563eb;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0; 
+  position: relative;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  max-width: 1400px;
+  gap: 40px;
+}
+
+h1.logo {
+  font-size: 160px; 
+  font-weight: 900;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 0.8;
+  white-space: nowrap;
+  margin-top: -20px; 
+  margin-bottom: 20px;
+}
+
+.dev {
+  color: white;
+}
+
+.bank {
+  color: white;
+  text-shadow: 9Px -9px 0px #ff4d4d !important; /*sombra la, tive q colocar important pq n tava indo*/
+}
+
+.input-api {
+  width: 100%;
+  padding: 25px; 
+  border-radius: 8px;
+  border: none;
+  background-color: #ffffff !important;
+  color: #3c3c3c;
+  text-align: center;
+  font-size: 24px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-entrar {
+  padding: 18px 50px;
+  background-color: #0a1970;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 27px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.help-button {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  width: 90px;
+  height: 90px;
+  background: white;
+  color: #2563eb;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 80px;
+  cursor: pointer;
+}
+

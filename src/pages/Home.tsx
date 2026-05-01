@@ -1,8 +1,37 @@
-// import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Header } from "../components/Header";
+import { ActionCard } from "../components/ActionCard";
+import { FooterBar } from "../components/FooterBarAPI";
+import { useApp } from "../context/AppContext"; //puxa todos os dados da api
+import "../css/Home.css";
 
-function Home() {
-  return <h1>Home</h1>
+export default function Home() {
+  const { userData, apiSource } = useApp(); //puxa todos os dados da api
+
+  const [endpoint] = useState(apiSource); 
+  const [response] = useState("");
+  const navigate = useNavigate();
+  
+
+  const saldo = userData?.current_balance || 0;
+  
+  return (
+    <>
+      <Header />
+
+      <main className="home-main">
+        <div className="home-pergunta">
+          <h2>O que você deseja <span className="home-destaque">fazer</span>?</h2>
+          <div className="home-saldo">Saldo atual: R$ {saldo.toFixed(2)}</div>
+        </div>
+        <div className="home-cards">
+          <ActionCard titulo="Depositar" tipo="depositar" onClick={() => navigate("/deposit")} />
+          <ActionCard titulo="Retirar"   tipo="retirar"   onClick={() => navigate("/withdraw")} />
+          <ActionCard titulo="Transação" tipo="transacao"  onClick={() => navigate("/history")} />
+        </div>
+      </main>
+      <FooterBar endpoint={endpoint} response={response} />
+    </>
+  );
 }
-
-export default Home

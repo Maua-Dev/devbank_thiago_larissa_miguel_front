@@ -1,0 +1,20 @@
+.banknotes-section {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+.banknotes-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.4;
+    padding-top: 8px;
+}
+
+.banknotes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+}
