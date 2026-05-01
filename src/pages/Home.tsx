@@ -18,7 +18,7 @@ export default function Home() {
   
   return (
     <>
-      <Header />
+      <Header user={user} />
 
       <main className="home-main">
         <div className="home-pergunta">

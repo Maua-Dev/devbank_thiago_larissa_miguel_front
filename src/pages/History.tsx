@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { HistoricoItem } from "../components/HistoryItems";
@@ -16,11 +16,6 @@ export default function History() {
   const transacoes: Transacao[] = userData?.all_transactions || [];
   const navigate = useNavigate();
 
-  const user = {
-    nome: userData?.name || "Visitante",
-    agencia: userData?.agency || "0000",
-    conta: userData?.account || "00000-0"
-  };
 
   useEffect(() => {
   if (!userData && apiSource) {
@@ -38,7 +33,7 @@ export default function History() {
 
   return (
     <>
-      <Header user={user} />
+      <Header user={user} agencia={agencia} conta={conta} />
 
       <main className="history-main">
         <div className="history-titulo">

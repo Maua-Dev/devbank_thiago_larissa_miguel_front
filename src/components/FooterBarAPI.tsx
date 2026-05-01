@@ -1,8 +1,5 @@
-// @ts-expect-error: CSS import handled by build tooling 
 import copyIcon from "../assets/images/copyIcon.png";
-// @ts-expect-error: CSS import handled by build tooling 
 import "../css/Home.css";
-//Miguel: o  codigo acima serve pro TypeScript ignorar arquivos como o de baixo como erros, e não  sublinhalos em vermelho;
 
 
 type FooterBarProps = {
