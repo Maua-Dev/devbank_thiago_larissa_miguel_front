@@ -11,6 +11,7 @@ const BANKNOTE_VALUES = [2, 5, 10, 20, 50, 100, 200]; // Thiago : esses são os 
 type QuantityMap = Record<number, number>; // Thiago: decidi usar um dicionário (key : value)
 
 export function Deposit() {
+    
     const navigate = useNavigate();
     const { userData, apiSource } = useApp();
     const [quantities, setQuantities] = useState<QuantityMap>(
@@ -46,7 +47,7 @@ export function Deposit() {
             const data = await response.json();
 
             console.log("Depósito realizado:", data);
-            
+
             navigate("/home");
         } catch (error) {
             console.error("Erro ao realizar depósito:", error);
@@ -61,7 +62,7 @@ export function Deposit() {
 
     return (
         <body className="deposit-main">
-            <Header />
+            <Header user={''} agencia={0} conta={0} />
             <BalanceHeader
                 currentBalance={userData.current_balance}
                 totalDeposited={totalDeposited}

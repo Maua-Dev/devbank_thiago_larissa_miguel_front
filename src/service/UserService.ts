@@ -1,4 +1,4 @@
-import api from "./api";
+import api from "../service/api.ts";
 
 export default async function getUser() {
 	const response = await api.get("/");
