@@ -1,32 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
 import { DepositActionButtons } from '../components/DepositActionButtons';
 import "../css/Deposit.css";
 import { Header } from '../components/Header';
-import getUser from '../service/UserService';
+import { useApp } from '../context/AppContext';
 import { depositPost, BANKNOTE_VALUES } from "../service/TransactionsService.ts";
-import type { User } from "../type/User.ts";
 
 export function Deposit() {
 
     const navigate = useNavigate();
-
-    const [user, setUser] = useState<User>();
-    const balance = user?.current_balance;
-
-    useEffect(() => {
-        const loadUser = async () => {
-            try {
-                const data = await getUser();
-                setUser(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        loadUser();
-    }, []);
+    const { userData, refreshUser } = useApp();
+    const balance = userData?.current_balance;
 
     const [selectedBanknotes, setSelectedBanknotes] = useState<BANKNOTE_VALUES>({
         "2": 0,
@@ -58,6 +44,7 @@ export function Deposit() {
     async function handleDeposit() {
         try {
             await depositPost(selectedBanknotes);
+            await refreshUser();
             navigate("/home");
         } catch (error) {
             console.error("Erro ao realizar depósito:", error);

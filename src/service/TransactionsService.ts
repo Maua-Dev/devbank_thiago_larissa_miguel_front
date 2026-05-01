@@ -23,8 +23,6 @@ export const depositPost = async (
     data: BANKNOTE_VALUES
 ): Promise<TransactionResponse | TransactionResponseError> => {
 	const response = await api.post<TransactionResponse | TransactionResponseError>("/deposit", data);
-	window.location.reload();
-
 	return response.data;
 };
 
@@ -32,8 +30,6 @@ export const withdrawPost = async (
     data: BANKNOTE_VALUES
 ): Promise<TransactionResponse | TransactionResponseError> => {
     const response = await api.post<TransactionResponse | TransactionResponseError>("/withdraw", data);
-    window.location.reload();
-
     return response.data;
 };
 

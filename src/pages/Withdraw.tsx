@@ -1,31 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
 import { WithdrawActionButtons } from '../components/WithdrawActionButtons';
 import { Header } from '../components/Header';
 import "../css/Withdraw.css";
-import getUser from '../service/UserService';
+import { useApp } from '../context/AppContext';
 import { withdrawPost, BANKNOTE_VALUES } from "../service/TransactionsService.ts";
-import type { User } from "../type/User.ts";
 
 export function Withdraw() {
 
     const navigate = useNavigate();
-    const [user, setUser] = useState<User>();
-    const balance = user?.current_balance;
-
-    useEffect(() => {
-        const loadUser = async () => {
-            try {
-                const data = await getUser();
-                setUser(data);
-            } catch (error) {
-                console.error(error);
-            }
-        };
-        loadUser();
-    }, []);
+    const { userData, refreshUser } = useApp();
+    const balance = userData?.current_balance;
 
     const [selectedBanknotes, setSelectedBanknotes] = useState<BANKNOTE_VALUES>({
         "2": 0,
@@ -54,6 +41,7 @@ export function Withdraw() {
     async function handleWithdraw() {
         try {
             await withdrawPost(selectedBanknotes);
+            await refreshUser(); 
             navigate("/home");
         } catch (error) {
             console.error("Erro ao realizar saque:", error);
