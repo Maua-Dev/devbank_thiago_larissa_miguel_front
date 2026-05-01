@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { ActionCard } from "../components/ActionCard";
@@ -7,10 +6,7 @@ import { useApp } from "../context/AppContext";
 import "../css/Home.css";
 
 export default function Home() {
-  const { userData, apiSource } = useApp();
-
-  const [endpoint] = useState(apiSource);
-  const [response] = useState("");
+  const { userData, apiSource} = useApp();
   const navigate = useNavigate();
 
   const saldo = userData?.current_balance ?? 0;
@@ -30,7 +26,7 @@ export default function Home() {
           <ActionCard titulo="Transação" tipo="transacao"  onClick={() => navigate("/history")} />
         </div>
       </main>
-      <FooterBar endpoint={endpoint} response={response} />
+      <FooterBar endpoint={apiSource} response=""/>
     </>
   );
 }
