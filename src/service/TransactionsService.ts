@@ -37,7 +37,7 @@ export const withdrawPost = async (
     return response.data;
 };
 
-type Transaction = {
+export type Transaction = {
     type: string;
     value: number;
     current_balance: number;

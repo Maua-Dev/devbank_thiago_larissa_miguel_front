@@ -1,39 +1,34 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { HistoricoItem } from "../components/HistoryItems";
-import { useApp } from "../context/AppContext";
 import "../css/History.css";
-
-type Transacao = {
-  tipo: string;
-  valor: number;
-  data: string;
-};
+import { getHistory, Transaction } from "../service/TransactionsService.ts";
 
 export default function History() {
-  const { userData, apiSource, setUserData } = useApp();
-  const transacoes: Transacao[] = userData?.all_transactions || [];
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [loading, setLoading] = useState(true);
+
   const navigate = useNavigate();
 
-
   useEffect(() => {
-  if (!userData && apiSource) {
-    fetch(`${apiSource}/history`)
-      .then(res => res.json())
-      .then(data => {
-        setUserData((prev: any) => ({
-          ...prev,
-          all_transactions: data.all_transactions 
-        }));
-      })
-      .catch(err => console.error("Erro ao buscar histórico:", err));
-  }
-}, [userData, apiSource, setUserData]);
+    async function loadHistory() {
+      try {
+        const data = await getHistory();
+        setTransactions(data.all_transactions);
+      } catch (err) {
+        console.error("Erro ao buscar histórico:", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadHistory();
+  }, []);
 
   return (
     <>
-      <Header user={user} agencia={agencia} conta={conta} />
+      <Header />
 
       <main className="history-main">
         <div className="history-titulo">
@@ -41,16 +36,21 @@ export default function History() {
         </div>
 
         <div className="history-lista">
-          {transacoes.length === 0 ? (
+          {loading ? (
+            <p className="history-vazio">Carregando...</p>
+          ) : transactions.length === 0 ? (
             <p className="history-vazio">Nenhuma transação encontrada.</p>
           ) : (
-            transacoes.map((transacao, index) => (
+            transactions.map((transacao, index) => (
               <HistoricoItem key={index} transacao={transacao} />
             ))
           )}
         </div>
 
-        <button className="history-voltar" onClick={() => navigate("/home")}>
+        <button
+          className="history-voltar"
+          onClick={() => navigate("/home")}
+        >
           Voltar
         </button>
       </main>
