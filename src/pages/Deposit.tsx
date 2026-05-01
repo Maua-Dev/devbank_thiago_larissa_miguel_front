@@ -1,53 +1,63 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
-import { useApp } from "../context/AppContext";
 import { DepositActionButtons } from '../components/DepositActionButtons';
 import "../css/Deposit.css";
 import { Header } from '../components/Header';
-
-const BANKNOTE_VALUES = [2, 5, 10, 20, 50, 100, 200]; // Thiago : esses são os valores de cada cédula para as operações
-type QuantityMap = Record<number, number>; // Thiago: decidi usar um dicionário (key : value)
+import getUser from '../service/UserService';
+import { depositPost, BANKNOTE_VALUES } from "../service/TransactionsService.ts";
+import type { User } from "../type/User.ts";
 
 export function Deposit() {
-    
-    const navigate = useNavigate();
-    const { userData, apiSource } = useApp();
-    const [quantities, setQuantities] = useState<QuantityMap>(
-        Object.fromEntries(BANKNOTE_VALUES.map((v) => [v, 0]))
-    );
 
-    const totalDeposited = Object.entries(quantities).reduce(
-        (sum, [value, qty]) => sum + Number(value) * qty,
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState<User>();
+    const balance = user?.current_balance;
+
+    useEffect(() => {
+        const loadUser = async () => {
+            try {
+                const data = await getUser();
+                setUser(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        loadUser();
+    }, []);
+
+    const [selectedBanknotes, setSelectedBanknotes] = useState<BANKNOTE_VALUES>({
+        "2": 0,
+        "5": 0,
+        "10": 0,
+        "20": 0,
+        "50": 0,
+        "100": 0,
+        "200": 0,
+    });
+
+    const totalDeposited = Object.entries(selectedBanknotes).reduce(
+        (sum, [value, qty]) =>
+            sum + Number(value) * qty,
         0
     );
 
     function handleAdd(value: number) {
-        setQuantities((prev) => ({ ...prev, [value]: prev[value] + 1 }));
+        setSelectedBanknotes((prev) => ({ ...prev, [String(value)]: prev[String(value) as keyof BANKNOTE_VALUES] + 1 }));
     }
 
     function handleSubtract(value: number) {
-        setQuantities((prev) => ({ ...prev, [value]: Math.max(0, prev[value] - 1) }));
+        setSelectedBanknotes((prev) => ({
+            ...prev,
+            [String(value)]: Math.max(0, prev[String(value) as keyof BANKNOTE_VALUES] - 1),
+        }));
     }
 
-    //chamar no backend;
-    async function handleDeposit(totalDeposited: number) {
+    async function handleDeposit() {
         try {
-            const response = await fetch(`${apiSource}/deposit`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: totalDeposited }),
-            });
-
-             if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-                }
-                
-            const data = await response.json();
-
-            console.log("Depósito realizado:", data);
-
+            await depositPost(selectedBanknotes);
             navigate("/home");
         } catch (error) {
             console.error("Erro ao realizar depósito:", error);
@@ -55,16 +65,16 @@ export function Deposit() {
         }
     }
 
-    const banknotes = BANKNOTE_VALUES.map((v) => ({
-        value: v,
-        quantity: quantities[v],
+    const banknotes = Object.entries(selectedBanknotes).map(([value, quantity]) => ({
+        value: Number(value),
+        quantity,
     }));
 
     return (
-        <body className="deposit-main">
-            <Header user={''} agencia={0} conta={0} />
+        <div className="deposit-main">
+            <Header/>
             <BalanceHeader
-                currentBalance={userData.current_balance}
+                currentBalance={balance ?? 0}
                 totalDeposited={totalDeposited}
             />
             <BanknotesGrid
@@ -74,9 +84,9 @@ export function Deposit() {
             />
             <DepositActionButtons
                 onBack={() => navigate("/home")}
-                onDeposit={() => handleDeposit(totalDeposited)}
+                onDeposit={handleDeposit}
                 disabled={totalDeposited === 0}
             />
-        </body>
+        </div>
     );
 }

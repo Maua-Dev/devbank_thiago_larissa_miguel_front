@@ -1,6 +1,6 @@
-import api from "./api.ts";
+import api from "./ApiService.ts";
 
-export type Banknote = {
+export type BANKNOTE_VALUES = {
 	"2": number;
 	"5": number;
 	"10": number;
@@ -20,12 +20,21 @@ type TransactionResponseError = {
 }
 
 export const depositPost = async (
-    data: Banknote
+    data: BANKNOTE_VALUES
 ): Promise<TransactionResponse | TransactionResponseError> => {
 	const response = await api.post<TransactionResponse | TransactionResponseError>("/deposit", data);
 	window.location.reload();
 
 	return response.data;
+};
+
+export const withdrawPost = async (
+    data: BANKNOTE_VALUES
+): Promise<TransactionResponse | TransactionResponseError> => {
+    const response = await api.post<TransactionResponse | TransactionResponseError>("/withdraw", data);
+    window.location.reload();
+
+    return response.data;
 };
 
 type Transaction = {

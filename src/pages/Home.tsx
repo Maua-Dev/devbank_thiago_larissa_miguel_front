@@ -3,22 +3,21 @@ import { useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
 import { ActionCard } from "../components/ActionCard";
 import { FooterBar } from "../components/FooterBarAPI";
-import { useApp } from "../context/AppContext"; //puxa todos os dados da api
+import { useApp } from "../context/AppContext";
 import "../css/Home.css";
 
 export default function Home() {
-  const { userData, apiSource } = useApp(); //puxa todos os dados da api
+  const { userData, apiSource } = useApp();
 
-  const [endpoint] = useState(apiSource); 
+  const [endpoint] = useState(apiSource);
   const [response] = useState("");
   const navigate = useNavigate();
-  
 
-  const saldo = userData?.current_balance || 0;
-  
+  const saldo = userData?.current_balance ?? 0;
+
   return (
     <>
-      <Header user={user} />
+      <Header />
 
       <main className="home-main">
         <div className="home-pergunta">
