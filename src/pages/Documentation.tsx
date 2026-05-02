@@ -112,8 +112,13 @@ timestamp [float] - instante da operação`,
 
   return (
     <div className="doc-container">
-      <h1>Documentação</h1>
-      <div className="doc-content">
+    <h1>
+      <div className="logo-devbank">
+        DEV<span>BANK</span>
+      </div>
+      <span>Documentação</span> 
+    </h1>
+    <div className="doc-content">
         {docData.map((item) => (
           <DocumentationItem
             key={item.id}

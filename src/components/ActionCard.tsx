@@ -1,4 +1,3 @@
-//Miguel: o  codigo acima serve pro TypeScript ignorar arquivos como o de baixo como erros, e não  sublinhalos em vermelho;
 import "../css/ActionCard.css";
 
 type ActionCardTipo = "depositar" | "retirar" | "transacao";

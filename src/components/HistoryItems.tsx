@@ -1,22 +1,17 @@
 
 import "../css/History.css";
-
-type Transacao = {
-  tipo: string;
-  valor: number;
-  data: string;
-};
+import { Transaction } from "../service/TransactionsService";
 
 type HistoricoItemProps = {
-  transacao: Transacao;
+  transacao: Transaction;
 };
 
 export function HistoricoItem({ transacao }: HistoricoItemProps) {
   return (
     <div className="historico-item">
-      <span className="historico-tipo">{transacao.tipo}</span>
-      <span className="historico-valor">R$ {transacao.valor.toFixed(2)}</span>
-      <span className="historico-data">{transacao.data}</span>
+      <span className="historico-tipo">{transacao.type}</span>
+      <span className="historico-valor">R$ {transacao.value.toFixed(2)}</span>
+      <span className="historico-data">{new Date(transacao.timestamp).toLocaleString()}</span>
     </div>
   );
 }

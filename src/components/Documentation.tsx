@@ -1,4 +1,3 @@
-// @ts-expect-error
 import copyIcon from "../assets/images/copyIcon.png";
 
 type DocumentationItemProps = {

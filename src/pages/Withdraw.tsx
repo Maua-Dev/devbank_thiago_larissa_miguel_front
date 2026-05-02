@@ -4,68 +4,61 @@ import { BalanceHeader } from '../components/BalanceHeader';
 import { BanknotesGrid } from '../components/BanknotesGrid';
 import { WithdrawActionButtons } from '../components/WithdrawActionButtons';
 import { Header } from '../components/Header';
-import { useApp } from "../context/AppContext";
 import "../css/Withdraw.css";
-
-const BANKNOTE_VALUES = [2, 5, 10, 20, 50, 100, 200];
-type QuantityMap = Record<number, number>;
+import { useApp } from '../context/AppContext';
+import { withdrawPost, BANKNOTE_VALUES } from "../service/TransactionsService.ts";
 
 export function Withdraw() {
-    const navigate = useNavigate();
-    const { userData, apiSource } = useApp();
-    const currentBalance = userData?.current_balance || 0;
-    const [quantities, setQuantities] = useState<QuantityMap>(
-        Object.fromEntries(BANKNOTE_VALUES.map((v) => [v, 0]))
-    );
 
-    const totalWithdraw = Object.entries(quantities).reduce(
-        (sum, [value, qty]) => sum + Number(value) * qty,
+    const navigate = useNavigate();
+    const { userData, refreshUser } = useApp();
+    const balance = userData?.current_balance;
+
+    const [selectedBanknotes, setSelectedBanknotes] = useState<BANKNOTE_VALUES>({
+        "2": 0,
+        "5": 0,
+        "10": 0,
+        "20": 0,
+        "50": 0,
+        "100": 0,
+        "200": 0,
+    });
+
+    const totalWithdraw = Object.entries(selectedBanknotes).reduce(
+        (sum, [value, qty]) =>
+            sum + Number(value) * qty,
         0
     );
 
     function handleAdd(value: number) {
-        setQuantities((prev) => ({ ...prev, [value]: prev[value] + 1 }));
+        setSelectedBanknotes((prev) => ({ ...prev, [value]: prev[String(value) as keyof BANKNOTE_VALUES] + 1 }));
     }
 
     function handleSubtract(value: number) {
-        setQuantities((prev) => ({ ...prev, [value]: Math.max(0, prev[value] - 1) }));
+        setSelectedBanknotes((prev) => ({ ...prev, [value]: Math.max(0, prev[String(value) as keyof BANKNOTE_VALUES] - 1) }));
     }
 
-    //chamar no backend;
-    async function handleWithdraw(totalWithdraw: number) {
+    async function handleWithdraw() {
         try {
-            const response = await fetch(`${apiSource}/withdraw`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ amount: totalWithdraw }),
-            });
-
-            if (!response.ok) {
-            throw new Error(`Erro HTTP: ${response.status}`);
-                }
-
-            const data = await response.json();
-
-            console.log("Saque realizado:", data);
-
+            await withdrawPost(selectedBanknotes);
+            await refreshUser(); 
             navigate("/home");
-
         } catch (error) {
             console.error("Erro ao realizar saque:", error);
             alert("Erro ao realizar saque");
         }
     }
 
-    const banknotes = BANKNOTE_VALUES.map((v) => ({
-        value: v,
-        quantity: quantities[v],
+    const banknotes = Object.entries(selectedBanknotes).map(([value, quantity]) => ({
+        value: Number(value),
+        quantity,
     }));
 
     return (
         <div className="withdraw-main">
-            <Header />
+            <Header/>
             <BalanceHeader
-                currentBalance={currentBalance}
+                currentBalance={balance ?? 0}
                 totalDeposited={totalWithdraw}
             />
             <BanknotesGrid
@@ -75,8 +68,8 @@ export function Withdraw() {
             />
             <WithdrawActionButtons
                 onBack={() => navigate("/home")}
-                onWithdraw={() => handleWithdraw(totalWithdraw)}
-                disabled={totalWithdraw === 0 || totalWithdraw > currentBalance}
+                onWithdraw={handleWithdraw}
+                disabled={totalWithdraw === 0 || totalWithdraw > (balance ?? 0)}
             />
         </div>
     );

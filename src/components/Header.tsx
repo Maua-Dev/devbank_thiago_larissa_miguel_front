@@ -1,20 +1,26 @@
-// @ts-expect-error: CSS import handled by build tooling // Thiago: adicionei isso pro código não dar pau, estou descobrindo pra que serve (copilot que adicionou)
 import "../css/Header.css";
 import { useNavigate } from 'react-router-dom';
-import { useApp } from "../context/AppContext"; //puxa todos os dados da api
-
+import { useEffect, useState } from "react";
+import getUser from "../service/UserService";
+import type { User } from "../type/User.ts";
 
 
 export function Header() {
+
   const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null);
 
-  const {userData} = useApp(); //puxa todos os dados da api
-
-  const user = ({
-    nome: userData?.name || "Visitante",
-    agencia: userData?.agency || "0000",
-    conta: userData?.account || "00000-0"
-  });
+  useEffect(() => {
+    const loadUser = async () => {
+      try {
+        const data = await getUser();
+        setUser(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    loadUser();
+  }, []);
 
   return (
     <header className="header">
@@ -22,17 +28,15 @@ export function Header() {
         <span className="dev-header">DEV</span>
         <span className="bank-header">BANK</span>
       </div>
-    
+
       <div className="header-right">
-
         <div className="user-box">
-        <p>Nome: {user.nome}</p>
-        <p>Agência: {user.agencia}</p>
-        <p>Conta: {user.conta}</p>
-        </div> 
+          <p>Nome: {user?.name}</p>
+          <p>Agência: {user?.agency}</p>
+          <p>Conta: {user?.account}</p>
+        </div>
 
-         <div className="help" onClick={() => navigate('/documentation')}>?</div>
-
+        <div className="help" onClick={() => navigate('/documentation')}>?</div>
       </div>
     </header>
   );
