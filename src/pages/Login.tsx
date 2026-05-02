@@ -2,16 +2,18 @@ import '../css/Login.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from "../context/AppContext"; 
+import { ErrorModal } from "../components/ErrorModal"; // ADICIONADO
 
 const Login = () => {
   const { setApiSource, setUserData } = useApp();
   const [apiUrl, setApiUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState(""); // ADICIONADO
   const navigate = useNavigate();
   
 
 const handleLogin = async () => {
-  if (!apiUrl) return alert("Insira uma URL");
+  if (!apiUrl) return setErro("Insira uma URL"); // ALTERADO
   
   setLoading(true);
   try {
@@ -25,13 +27,15 @@ const handleLogin = async () => {
 
     navigate("/home");
   } catch (error) {
-    alert("Erro ao conectar na API");
+    setErro("Erro ao conectar na API"); // ALTERADO
   } finally {
     setLoading(false);
   }
 };
   return (
     <div className="login-page-wrapper">
+      {erro && <ErrorModal mensagem={erro} onClose={() => setErro("")} />} {/* ADICIONADO */}
+
       <div className="login-banner">
             <div className="help-button" onClick={() => navigate('/documentation')}>?</div>
         <div className="content-container">
