@@ -7,12 +7,12 @@ type WithdrawActionButtonsProps = {
 
 export function WithdrawActionButtons({ onBack, onWithdraw, disabled }: WithdrawActionButtonsProps) {
     return (
-        <div className="action-buttons">
+        <div className="withdraw-action-buttons">
             <button className="btn-back" onClick={onBack}>
                 Voltar
             </button>
             <button
-                className="btn-deposit"
+                className="btn-withdraw"
                 onClick={onWithdraw}
                 disabled={disabled}
             >

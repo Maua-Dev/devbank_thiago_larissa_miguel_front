@@ -176,6 +176,7 @@ body {
 
 .btn-back,
 .btn-withdraw {
+  min-width: 160px; 
   padding: 12px 40px;
   border-radius: 8px;
   font-size: 15px;
